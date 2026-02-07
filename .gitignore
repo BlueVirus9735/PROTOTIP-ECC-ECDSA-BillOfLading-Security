@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# User Uploads
+api/uploads/pdf/*
+api/uploads/signatures/*
+!api/uploads/pdf/.gitkeep
+!api/uploads/signatures/.gitkeep
+api/uploads/temp/
+
+# Python cache
+__pycache__/
+*.py[cod]
