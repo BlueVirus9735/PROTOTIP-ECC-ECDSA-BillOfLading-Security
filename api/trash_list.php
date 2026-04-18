@@ -1,5 +1,5 @@
 <?php
-// api/docs_list.php
+// api/trash_list.php
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 include 'db.php';
 
 try {
-    $stmt = $pdo->query("SELECT * FROM documents WHERE is_deleted = 0 ORDER BY created_at DESC");
+    $stmt = $pdo->query("SELECT * FROM documents WHERE is_deleted = 1 ORDER BY created_at DESC");
     $documents = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     echo json_encode([

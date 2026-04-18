@@ -21,8 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($doc_file['tmp_name'], $doc_path) && move_uploaded_file($sig_file['tmp_name'], $sig_path)) {
             $public_key = realpath(__DIR__ . '/keys/public_key.pem');
             $python_script = realpath(__DIR__ . '/../crypto/verify.py');
+            $python_exe = 'C:\laragon\bin\python\python-3.10\python.exe';
+            if (!file_exists($python_exe)) {
+                $python_exe = __DIR__ . '/../crypto_venv/Scripts/python.exe';
+            }
             
-            $command = "python \"$python_script\" \"$public_key\" \"$doc_path\" \"$sig_path\" 2>&1";
+            $command = "\"$python_exe\" \"$python_script\" \"$public_key\" \"$doc_path\" \"$sig_path\" 2>&1";
             $output = shell_exec($command);
             
             $is_valid = (strpos($output, 'Signature is VALID') !== false);

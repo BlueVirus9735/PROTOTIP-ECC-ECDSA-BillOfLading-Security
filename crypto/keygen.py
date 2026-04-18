@@ -7,7 +7,6 @@ def generate_keys(key_path):
     if not os.path.exists(key_path):
         os.makedirs(key_path)
         
-    # Generate private key (SECP256K1 is often used in blockchain/research)
     private_key = ec.generate_private_key(ec.SECP256K1())
     
     # Serialize private key

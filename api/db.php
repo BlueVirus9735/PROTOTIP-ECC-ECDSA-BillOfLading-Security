@@ -1,6 +1,6 @@
 <?php
 // api/db.php
-$host = 'localhost';
+$host = '127.0.0.1';
 $db   = 'pelindo_crypto';
 $user = 'root';
 $pass = '';
@@ -16,8 +16,8 @@ $options = [
 try {
      $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-     // If database doesn't exist, we can handle it later or create it.
-     // For now, we'll just throw a simple error message.
-     die("Database connection failed. Please ensure 'pelindo_crypto' database exists.");
+     http_response_code(500);
+     echo json_encode(['status' => 'error', 'message' => 'Koneksi Database Gagal. Pastikan database pelindo_crypto sudah terbuat di phpMyAdmin! Error: ' . $e->getMessage()]);
+     exit;
 }
 ?>
